@@ -4,9 +4,9 @@ Api are devided into 2 parts.First is atom api,which is not based other api.The 
 Api test case is defined in TestCaseDemo.json   
 You can gather your TestCase from access.log(nginx,apache,etc) with LogParse.php
 ```
-tail -n 10 /var/log/demo888.cn.access.log | php LogParser.php TestCaseDemo.json -aroute_a > TestCaseDemo.route_a.json
+tail -n 100 /var/log/demo888.cn.access.log | php LogParser.php TestCaseDemo.json -aroute_a > TestCaseDemo.route_a.json
 ```
-Command above means I want to fetch args from /var/log/demo888.cn.access.log and assemble route_a into a new TestCase named TestCaseDemo.route_a.json.By the way,param -a is optional.Once it's omitted,all the atom api will be matched from access_log.   
+Command above means I'm trying to fetch args from the last line of /var/log/demo888.cn.access.log and assemble it into a new TestCase named TestCaseDemo.route_a.json.By the way,param -a is optional.Once it's omitted,all the atom api will be matched from access_log.   
 TestCaseDemo.route_a.json may look like
 ```
 {"url":"http:\/\/www.demo888.cn\/index.php?","args":{"tel":"xxxxxxxxxxx","token":"d783715c147b3da0e1bde22173be115d","_t":"<?php time(); ?>"},"atom":[{"desc":"this is test for route_a","sampleUrl":"_m=route_a&args={\"input_str\":${input_str},\"input_time\":${input_time}}","args":{"input_str":"this is a","input_time":"<?php time() ?>"}}],"case":{"route_b":[{"route_a":{"desc":"this is route_a","args":{"input_str":"this is a","input_time":"<?php 'timestamp:'.time() ?>"}}},{"route_b":{"desc":"this is route_b","args":{"str":"${route_a['output']['data']['output_str']}","_t":"${route_a['args']['input_time']}"}}}]}}
