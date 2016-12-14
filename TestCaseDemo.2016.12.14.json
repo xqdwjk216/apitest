@@ -1,0 +1,42 @@
+{
+	"url": "http:\/\/www.demo888.cn\/index.php?",
+	"args": {
+		"tel": "xxxxxxxxxxx",
+		"token": "d783715c147b3da0e1bde22173be115d",
+		"_t": "<?php time(); ?>"
+	},
+	"atom": [{
+		"desc": "this is test for route_a",
+		"sampleUrl": "_m=route_a&args={\"input_str\":${input_str},\"input_time\":${input_time}}",
+		"args": {
+			"input_str": "this is input for route_a",
+			"input_time": "<?php time() ?>"
+		}
+	},{
+		"desc": "this is test for route_b",
+		"sampleUrl": "_m=route_b&args={\"input_str\":${input_str},\"input_time\":${input_time}}",
+		"args": {
+			"input_str": "this is input for route_b",
+			"input_time": "<?php time() ?>"
+		}
+	}],
+	"case": {
+		"route_b": [{
+			"route_a": {
+				"desc": "this is route_a",
+				"args": {
+					"input_str": "this is input for route_a",
+					"input_time": "<?php time() ?>"
+				}
+			}
+		}, {
+			"route_b": {
+				"desc": "this is route_b",
+				"args": {
+					"input_str": "${route_a['output']['data']['output_str']}",
+					"input_time": "${route_a['args']['input_time']}"
+				}
+			}
+		}]
+	}
+}
